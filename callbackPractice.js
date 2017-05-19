@@ -24,7 +24,7 @@ and what you should write is the sayHi function that makes the code above work,
 
   // Code Here
 
-  var first = function(arr,cb){
+  function first(arr,cb){
     return cb(arr[0])
   }
 
@@ -40,7 +40,8 @@ and what you should write is the sayHi function that makes the code above work,
 // 2. Write a function called last which returns the last item of the array using a callback function.
 
   //Code Here
-var last = function(arr, cb){
+
+function last(arr, cb){
   return cb(arr[arr.length-1]);
 };
 
@@ -53,7 +54,9 @@ last(names, function(lastName){
 // 3. Write a function called multiply that multiplies two numbers using a callback function.
 
   //Code Here
-
+function multiply(a, b, cb){
+  return cb(a * b);
+}
 
 multiply(4, 3, function(answer){
   console.log('The answer is ' + answer); //should console.log 12
@@ -65,6 +68,17 @@ multiply(4, 3, function(answer){
 // If it does, return true using the callback, if not return false.
 
   //Code Here
+function contains(arr, str, cb){
+  var name = function(){
+    for(var i = 0; i < arr.length; i++){
+      if(arr[i] === str){
+        return true;
+      }
+    }
+    return false;
+  }
+    cb(name());
+}
 
 contains(names, 'Colt', function(result){
   if(result === true){
@@ -80,6 +94,14 @@ contains(names, 'Colt', function(result){
 // the callback function with the array of unique names.
 
     //Code Here
+function uniq(arr, cb) {
+  for(i = arr.length - 2; i >= 0; i--){
+    if(arr.lastIndexOf(arr[i]) > i){
+      arr.splice(arr.lastIndexOf(arr[i]), 1);
+    }
+  }
+  cb(arr);
+}
 
 uniq(names, function(uniqArr){
   console.log('The new names array with all the duplicate items removed is ', uniqArr);
